@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.dropwizard.java8.Java8Bundle;
 import com.codahale.metrics.servlets.PingServlet;
 
 public class TranxServer extends Application<TranxConfiguration> {
@@ -23,7 +24,7 @@ public class TranxServer extends Application<TranxConfiguration> {
 
 	@Override
 	public void initialize(Bootstrap<TranxConfiguration> bootstrap) {
-		// nothing to do yet
+		bootstrap.addBundle(new Java8Bundle());
 	}
 
 	@Override
