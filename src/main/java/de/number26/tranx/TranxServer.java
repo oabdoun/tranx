@@ -36,6 +36,7 @@ public class TranxServer extends Application<TranxConfiguration> {
 
 		// transaction service
 		environment.jersey().register(new TransactionService(transactions));
+		environment.jersey().register(new FinderService(transactions));
 	}
 
 }

@@ -6,7 +6,7 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
-@Path("/transactionservice")
+@Path("/transactionservice/transaction")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TransactionService {
@@ -17,7 +17,7 @@ public class TransactionService {
 		this.transactions = transactions;
 	}
 
-	@Path("/transaction/{transaction_id}")
+	@Path("/{transaction_id}")
 	@PUT
 	public OperationResult createTransaction(
 			@PathParam("transaction_id") final long transactionId, 
@@ -26,7 +26,7 @@ public class TransactionService {
 		return OperationResult.OK;
 	}
 
-	@Path("/transaction/{transaction_id}")
+	@Path("/{transaction_id}")
 	@GET
 	public Transaction createTransaction(
 			@PathParam("transaction_id") final long transactionId) {
