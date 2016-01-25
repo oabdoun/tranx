@@ -14,17 +14,17 @@ import org.mockito.*;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
-public class FinderServiceTest {
+public class AggregatorServiceTest {
 
 	private static final Map<Long, Transaction> transactions = new HashMap();
 
 	@ClassRule
 	public static final ResourceTestRule resources = ResourceTestRule.builder()
-		.addResource(new FinderService(transactions))
+		.addResource(new AggregatorService(transactions))
 		.build();
 
 	@Before public void setup(){
-		transactions.put(4l, new Transaction("four", new BigDecimal(4), 0l));
+		transactions.put(4l, new Transaction("four", new BigDecimal("4"), 0l));
 		transactions.put(12l, new Transaction("twelve", new BigDecimal("12.12"), 4l));
 		transactions.put(16l, new Transaction("sixteen", new BigDecimal("16.16"), 4l));
 
@@ -36,44 +36,55 @@ public class FinderServiceTest {
 		transactions.clear();
 	}
 
-	@Test public void testFindByType() {
+	@Test public void testSumByParentId() {
 		// invoke
 		Response response = resources.client()
-			.target("/transactionservice/type/four")
+			.target("/transactionservice/sum/4")
 			.request()
 			.get();
 
 		// assert
 		assertEquals(200, response.getStatus());
-		List<Integer> ids = response.readEntity(List.class);
-		assertEquals(3, ids.size());
-		assertTrue(ids.containsAll(Arrays.asList(4, 44, 444)));
+		AggregatorService.Sum sum = response.readEntity(AggregatorService.Sum.class);
+		assertEquals(32.28d, sum.getSum().doubleValue(), 0.0d);
 	}
 
-	@Test public void testByFindTypeSingle() {
+	@Test public void testSumByParentIdNoParent() {
 		// invoke
 		Response response = resources.client()
-			.target("/transactionservice/type/sixteen")
+			.target("/transactionservice/sum/64")
 			.request()
 			.get();
 
 		// assert
 		assertEquals(200, response.getStatus());
-		List<Integer> ids = response.readEntity(List.class);
-		assertEquals(1, ids.size());
-		assertEquals(16, ids.get(0).intValue());
+		AggregatorService.Sum sum = response.readEntity(AggregatorService.Sum.class);
+		assertEquals(444, sum.getSum().intValue());
 	}
 
-	@Test public void testFindByTypeEmpty() {
+	@Test public void testSumByParentIdNoChild() {
 		// invoke
 		Response response = resources.client()
-			.target("/transactionservice/type/foo")
+			.target("/transactionservice/sum/12")
 			.request()
 			.get();
 
 		// assert
 		assertEquals(200, response.getStatus());
-		List<Integer> ids = response.readEntity(List.class);
-		assertTrue(ids.isEmpty());
+		AggregatorService.Sum sum = response.readEntity(AggregatorService.Sum.class);
+		assertEquals(12.12d, sum.getSum().doubleValue(), 0.0d);
+	}
+	
+	@Test public void testSumByParentIdTransaction() {
+		// invoke
+		Response response = resources.client()
+			.target("/transactionservice/sum/128")
+			.request()
+			.get();
+
+		// assert
+		assertEquals(200, response.getStatus());
+		AggregatorService.Sum sum = response.readEntity(AggregatorService.Sum.class);
+		assertEquals(BigDecimal.ZERO, sum.getSum());
 	}
 }

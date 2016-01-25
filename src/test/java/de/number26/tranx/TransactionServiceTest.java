@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.*;
 
-import io.dropwizard.java8.jersey.*;
 import io.dropwizard.testing.*;
 import io.dropwizard.testing.junit.*;
 import org.junit.*;
@@ -23,8 +22,6 @@ public class TransactionServiceTest {
 	@ClassRule
 	public static final ResourceTestRule resources = ResourceTestRule.builder()
 		.addResource(new TransactionService(transactions))
-		.addProvider(OptionalMessageBodyWriter.class)
-		.addProvider(OptionalParamFeature.class)
 		.build();
 
 	@After public void tearDown(){

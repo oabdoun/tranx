@@ -6,7 +6,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.dropwizard.java8.Java8Bundle;
 import com.codahale.metrics.servlets.PingServlet;
 
 public class TranxServer extends Application<TranxConfiguration> {
@@ -24,7 +23,6 @@ public class TranxServer extends Application<TranxConfiguration> {
 
 	@Override
 	public void initialize(Bootstrap<TranxConfiguration> bootstrap) {
-		bootstrap.addBundle(new Java8Bundle());
 	}
 
 	@Override
@@ -37,6 +35,7 @@ public class TranxServer extends Application<TranxConfiguration> {
 		// transaction service
 		environment.jersey().register(new TransactionService(transactions));
 		environment.jersey().register(new FinderService(transactions));
+		environment.jersey().register(new AggregatorService(transactions));
 	}
 
 }

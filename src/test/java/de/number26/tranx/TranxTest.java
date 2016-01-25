@@ -41,7 +41,7 @@ public class TranxTest {
 		response = client
 		.path("/transactionservice/transaction/11")
 		.request()
-		.put(Entity.json(new Transaction("shopping", new BigDecimal(10000), 0l)));
+		.put(Entity.json(new Transaction("shopping", new BigDecimal(10000), 10l)));
 
 		assertEquals(200, response.getStatus());
 		assertEquals(OperationResult.OK, response.readEntity(OperationResult.class));
@@ -56,6 +56,26 @@ public class TranxTest {
 		List<Integer> ids = response.readEntity(List.class);
 		assertEquals(1, ids.size());
 		assertEquals(10, ids.get(0).intValue());
+
+		// get "sum" for transaction 10
+		response = client
+		.path("/transactionservice/sum/10")
+		.request()
+		.get();
+
+		assertEquals(200, response.getStatus());
+		AggregatorService.Sum sum = response.readEntity(AggregatorService.Sum.class);
+		assertEquals(15000, sum.getSum().intValue());
+
+		// get "sum" for transaction 11
+		response = client
+		.path("/transactionservice/sum/11")
+		.request()
+		.get();
+
+		assertEquals(200, response.getStatus());
+		sum = response.readEntity(AggregatorService.Sum.class);
+		assertEquals(10000, sum.getSum().intValue());
 	}
 
 }
