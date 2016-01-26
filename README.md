@@ -8,6 +8,8 @@ tranx is implemented using the [dropwizard](http://www.dropwizard.io/0.9.2/docs/
 
 it uses [gradle](http://gradle.org/) as its build tool and [snap-ci](https://snap-ci.com/) as its continuous integration platform.
 
+because i had to reboot my java dev environment from scratch, i developed it using "Sublime Text", with no "import" optimization...
+
 ## running
 
 to run the test suite:
