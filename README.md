@@ -27,14 +27,14 @@ then you can run the UAT curl-based scenario in another console:
 $ . src/test/bash/uat.sh 
 ```
 
-press `Ctrl+C` for stopping the webservice...
+press `Ctrl+C` to stop the webservice...
 
 ## known issues
 
-because [jackson](http://wiki.fasterxml.com/JacksonHome) uses java's default value when deserializing a missing property, the default parent_id of a transaction is '0' when no parent transaction is given. hence, transaction ID '0' becomes a special value... for the same reason, getting a transaction with no parent ID will show '0' in parent_id field:
+because [jackson](http://wiki.fasterxml.com/JacksonHome) uses java's default value when deserializing a missing property, the default parent_id of a transaction is '0' when no parent transaction is given. hence, transaction id '0' becomes a special value... for the same reason, getting a transaction with no parent id will show '0' in parent_id field:
 ```
 PUT transaction/32 { "amount": 12, "type": "foo"} => { "status": "ok" }
 GET transaction/32 => { "amount": 12, "type": "foo", "transaction_id": 0 }
 ```
 
-also, the `PUT transaction/$txid` endpoint was interpreted as meaning "set or replace transaction with ID `$txid`". another possibility would be to forbid replace, by using `ConcurrentMap::putIfAbsent` instead of `Map::put` in `TransactionService::setTransaction`.
+also, the `PUT transaction/$txid` endpoint was interpreted as meaning "set or replace transaction with id `$txid`". another possibility would be to forbid replace, by using `ConcurrentMap::putIfAbsent` instead of `Map::put` in `TransactionService::setTransaction`.
