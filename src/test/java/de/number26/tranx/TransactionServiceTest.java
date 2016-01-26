@@ -28,7 +28,7 @@ public class TransactionServiceTest {
 		reset(transactions);
 	}
 
-	@Test public void testCreateTransaction() {
+	@Test public void testSetTransaction() {
 		// invoke
 		Response response = resources.client()
 			.target("/transactionservice/transaction/0024")

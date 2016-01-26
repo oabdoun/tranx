@@ -19,7 +19,7 @@ public class TransactionService {
 
 	@Path("/{transaction_id}")
 	@PUT
-	public OperationResult createTransaction(
+	public OperationResult setTransaction(
 			@PathParam("transaction_id") final long transactionId, 
 			@Valid final Transaction transaction) {
 		transactions.put(transactionId, transaction);
@@ -28,7 +28,7 @@ public class TransactionService {
 
 	@Path("/{transaction_id}")
 	@GET
-	public Transaction createTransaction(
+	public Transaction getTransaction(
 			@PathParam("transaction_id") final long transactionId) {
 		if (!transactions.containsKey(transactionId)) {
 			throw new WebApplicationException(
