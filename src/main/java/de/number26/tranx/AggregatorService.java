@@ -9,6 +9,10 @@ import javax.ws.rs.core.*;
 
 import com.fasterxml.jackson.annotation.*;
 
+/**
+ * Service to compute transaction aggregation on
+ * the transaction repository.
+ */
 @Path("/transactionservice/sum")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -20,6 +24,9 @@ public class AggregatorService {
 		this.transactions = transactions;
 	}
 
+	/**
+	 * Sum amounts on the parent-children transactions chain.
+	 */
 	@Path("/{parent_id}")
 	@GET
 	public Sum sumByParentId(@PathParam("parent_id") final long parentId) {
@@ -32,6 +39,9 @@ public class AggregatorService {
 		);
 	}
 
+	/**
+	 * Value object to expose the sum aggregation result.
+	 */
 	public static class Sum {
 		private final BigDecimal sum;
 

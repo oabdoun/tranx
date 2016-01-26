@@ -6,6 +6,10 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
+/**
+ * Service to search transactions in
+ * the transaction repository.
+ */
 @Path("/transactionservice/type")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -17,6 +21,9 @@ public class FinderService {
 		this.transactions = transactions;
 	}
 
+	/**
+	 * Find transactions of a type.
+	 */
 	@Path("/{type}")
 	@GET
 	public List<Long> findByType(@PathParam("type") final String type) {

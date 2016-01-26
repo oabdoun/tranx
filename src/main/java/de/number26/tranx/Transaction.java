@@ -7,6 +7,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * A transaction described by its amount, type and optional
+ * parent transaction.
+ */
 public class Transaction {
 	@NotNull @NotEmpty private final String type;
 	@NotNull private final BigDecimal amount;

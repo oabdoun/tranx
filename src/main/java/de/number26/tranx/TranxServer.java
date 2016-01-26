@@ -8,6 +8,9 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import com.codahale.metrics.servlets.PingServlet;
 
+/**
+ * The application managing the Tranx webservice.
+ */
 public class TranxServer extends Application<TranxConfiguration> {
 	
 	public static void main(String[] args) throws Exception {

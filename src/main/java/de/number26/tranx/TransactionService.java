@@ -8,6 +8,10 @@ import javax.ws.rs.core.*;
 
 import com.fasterxml.jackson.annotation.*;
 
+/**
+ * Service to manage transactions in
+ * the transaction repository.
+ */
 @Path("/transactionservice/transaction")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -19,6 +23,9 @@ public class TransactionService {
 		this.transactions = transactions;
 	}
 
+	/**
+	 * Set or replace a transaction under a transaction id.
+	 */
 	@Path("/{transaction_id}")
 	@PUT
 	public OperationResult setTransaction(
@@ -28,6 +35,9 @@ public class TransactionService {
 		return OperationResult.OK;
 	}
 
+	/**
+	 * Get the transaction for a transaction id.
+	 */
 	@Path("/{transaction_id}")
 	@GET
 	public Transaction getTransaction(
@@ -41,6 +51,12 @@ public class TransactionService {
 		return transactions.get(transactionId);
 	}
 
+	/**
+	 * Value object to expose the result of adding a transaction in 
+	 * the repository.
+	 * OK and ERROR static variables should be used for positive/negative
+	 * result.
+	 */
 	public final static class OperationResult {
 		private final String status;
 		
