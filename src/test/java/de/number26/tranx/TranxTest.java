@@ -35,7 +35,9 @@ public class TranxTest {
 		.put(Entity.json(new Transaction("cars", new BigDecimal(5000), 0l)));
 
 		assertEquals(200, response.getStatus());
-		assertEquals(OperationResult.OK, response.readEntity(OperationResult.class));
+		assertEquals(
+			TransactionService.OperationResult.OK, 
+			response.readEntity(TransactionService.OperationResult.class));
 
 		// create "shopping" transaction
 		response = client
@@ -44,7 +46,9 @@ public class TranxTest {
 		.put(Entity.json(new Transaction("shopping", new BigDecimal(10000), 10l)));
 
 		assertEquals(200, response.getStatus());
-		assertEquals(OperationResult.OK, response.readEntity(OperationResult.class));
+		assertEquals(
+			TransactionService.OperationResult.OK, 
+			response.readEntity(TransactionService.OperationResult.class));
 
 		// get "cars" transactions
 		response = client

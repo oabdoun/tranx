@@ -38,7 +38,9 @@ public class TransactionServiceTest {
 
 		// assert
 		assertEquals(200, response.getStatus());
-		assertEquals(OperationResult.OK, response.readEntity(OperationResult.class));
+		assertEquals(
+			TransactionService.OperationResult.OK, 
+			response.readEntity(TransactionService.OperationResult.class));
 
 		// verify
 		ArgumentCaptor<Transaction> tx = ArgumentCaptor.forClass(Transaction.class);

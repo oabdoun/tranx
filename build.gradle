@@ -30,3 +30,12 @@ task start(type: JavaExec) {
 	main = 'de.number26.tranx.TranxServer'
 	args = ['server', 'src/test/resources/tranx.yaml']
 }
+
+apply plugin: 'findbugs'
+
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
+ }
