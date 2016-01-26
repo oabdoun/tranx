@@ -53,6 +53,7 @@ public class TranxTest {
 		.get();
 
 		assertEquals(200, response.getStatus());
+		@SuppressWarnings("unchecked")
 		List<Integer> ids = response.readEntity(List.class);
 		assertEquals(1, ids.size());
 		assertEquals(10, ids.get(0).intValue());

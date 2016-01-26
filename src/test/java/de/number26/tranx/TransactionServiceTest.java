@@ -24,6 +24,7 @@ public class TransactionServiceTest {
 		.addResource(new TransactionService(transactions))
 		.build();
 
+	@SuppressWarnings("unchecked")
 	@After public void tearDown(){
 		reset(transactions);
 	}

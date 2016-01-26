@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 public class FinderServiceTest {
 
-	private static final Map<Long, Transaction> transactions = new HashMap();
+	private static final Map<Long, Transaction> transactions = new HashMap<Long, Transaction>();
 
 	@ClassRule
 	public static final ResourceTestRule resources = ResourceTestRule.builder()
@@ -45,6 +45,7 @@ public class FinderServiceTest {
 
 		// assert
 		assertEquals(200, response.getStatus());
+		@SuppressWarnings("unchecked")
 		List<Integer> ids = response.readEntity(List.class);
 		assertEquals(3, ids.size());
 		assertTrue(ids.containsAll(Arrays.asList(4, 44, 444)));
@@ -59,6 +60,7 @@ public class FinderServiceTest {
 
 		// assert
 		assertEquals(200, response.getStatus());
+		@SuppressWarnings("unchecked")
 		List<Integer> ids = response.readEntity(List.class);
 		assertEquals(1, ids.size());
 		assertEquals(16, ids.get(0).intValue());
@@ -73,6 +75,7 @@ public class FinderServiceTest {
 
 		// assert
 		assertEquals(200, response.getStatus());
+		@SuppressWarnings("unchecked")
 		List<Integer> ids = response.readEntity(List.class);
 		assertTrue(ids.isEmpty());
 	}

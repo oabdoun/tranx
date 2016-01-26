@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 public class AggregatorServiceTest {
 
-	private static final Map<Long, Transaction> transactions = new HashMap();
+	private static final Map<Long, Transaction> transactions = new HashMap<Long, Transaction>();
 
 	@ClassRule
 	public static final ResourceTestRule resources = ResourceTestRule.builder()
