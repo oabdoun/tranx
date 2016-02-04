@@ -1,9 +1,5 @@
 # tranx [![Build Status](https://snap-ci.com/oabdoun/tranx/branch/master/build_image)](https://snap-ci.com/oabdoun/tranx/branch/master)
 
-Number26 code challenge solution
-
-## introduction
-
 tranx is implemented using the [dropwizard](http://www.dropwizard.io/0.9.2/docs/) framework, saving a lot of boilerplate code for delivering HTTP, REST, JSON serialization, validation.
 
 it uses [gradle](http://gradle.org/) as its build tool and [snap-ci](https://snap-ci.com/) as its continuous integration platform.
